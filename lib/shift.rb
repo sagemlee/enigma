@@ -17,5 +17,15 @@ class Shift
     assignments
   end
 
-  x
+  def offsets
+    assignments = {}
+    square_date = (@date.to_i * @date.to_i).to_s
+    assignments["A"] = square_date[-4].to_i
+    assignments["B"] = square_date[-3].to_i
+    assignments["C"] = square_date[-2].to_i
+    assignments["D"] = square_date[-1].to_i
+    assignments
+  end
+
+
 end
