@@ -27,5 +27,13 @@ class Shift
     assignments
   end
 
+  def shift
+    assignments = {}
+    assignments["A"] = keys["A"] + offsets["A"]
+    assignments["B"] = keys["B"] + offsets["B"]
+    assignments["C"] = keys["C"] + offsets["C"]
+    assignments["D"] = keys["D"] + offsets["D"]
+    assignments
+  end 
 
 end

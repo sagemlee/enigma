@@ -21,6 +21,10 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_can_create_offsets
-    assert_equal ({"A" => 1, "B"=> 0, "C" => 2, "D" => 5}), @shift.offsets 
+    assert_equal ({"A" => 1, "B"=> 0, "C" => 2, "D" => 5}), @shift.offsets
+  end
+
+  def test_it_can_create_shift
+    assert_equal ({"A" => 3, "B"=> 27, "C" => 73, "D" => 20}), @shift.shift
   end
 end
