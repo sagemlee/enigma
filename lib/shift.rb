@@ -6,6 +6,8 @@ class Shift
   def initialize(rand_number, date)
     @rand_number = rand_number
     @date = date
+    @alphabet =("a".."z").to_a << " "
+
   end
 
   def keys
@@ -34,6 +36,38 @@ class Shift
     assignments["C"] = keys["C"] + offsets["C"]
     assignments["D"] = keys["D"] + offsets["D"]
     assignments
-  end 
+  end
+
+  def new_alphabet
+    new_indexes = @alphabet.map do |letter|
+      if @alphabet.find_index(letter) == 0 || @alphabet.find_index(letter).modulo(4) == 0
+        @alphabet.find_index(letter) + shift["A"]
+      elsif @alphabet.find_index(letter).modulo(4) == 1
+        @alphabet.find_index(letter) + shift["B"]
+      elsif @alphabet.find_index(letter).modulo(4) == 2
+        @alphabet.find_index(letter) + shift["C"]
+      else
+        @alphabet.find_index(letter) + shift["D"]
+      end
+    end
+    new_letters = new_indexes.map do |number|
+      if number < 27
+        @alphabet.find do |letter|
+          @alphabet.find_index(letter) == number
+        end
+      else
+        low_num = number
+        until low_num < 27
+          low_num -= 27
+        end
+        @alphabet.find do |letter|
+          @alphabet.find_index(letter) == low_num
+        end
+      end
+    end
+    new_letters.to_h do |letter|
+      [new_letters.find_index(letter), letter]
+    end
+  end
 
 end
