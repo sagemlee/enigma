@@ -11,5 +11,21 @@ class Cipher
     @shift = Shift.new(@key, @date)
   end
 
+  def encrypt
+    encrypt_hash = Hash.new
+    encrypt_hash[:encryption] = @shift.encrypt(@message)
+    encrypt_hash[:key] = @key
+    encrypt_hash[:date] = @date
+    encrypt_hash
+  end
+
+  def decrypt
+    decrypt_hash = Hash.new
+    decrypt_hash[:decryption] = @shift.decrypt(@message)
+    decrypt_hash[:key] = @key
+    decrypt_hash[:date] = @date
+    decrypt_hash
+  end
+
 
 end
