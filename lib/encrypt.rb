@@ -4,7 +4,7 @@ incoming_text = handle.read
 
 handle.close
 
-puts incoming_text
+puts "Created 'encrypted.txt' with the key 82648 and date 240818"
 
 capitalized_text = incoming_text.upcase
 
