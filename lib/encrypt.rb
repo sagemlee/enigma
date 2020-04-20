@@ -6,7 +6,7 @@ handle.close
 
 puts "Created 'encrypted.txt' with the key 82648 and date 240818"
 
-capitalized_text = incoming_text.upcase
+decrypted_text = incoming_text.upcase
 
 writer = File.open(ARGV[1], "w")
 
