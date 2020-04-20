@@ -28,9 +28,7 @@ class ShiftTest < Minitest::Test
     assert_equal ({"A" => 3, "B"=> 27, "C" => 73, "D" => 20}), @shift.shift
   end
 
-  def test_it_has_new_alphabet
-    assert_equal "d", @shift.new_alphabet[0]
-    assert_equal  "b", @shift.new_alphabet[1]
-
+  def test_it_can_encrypt_a_string
+    assert_equal "keder ohulw", @shift.encrypt("hello world")
   end
 end
