@@ -38,55 +38,171 @@ class Shift
   end
 
 
+  def a_shift
+    bob = Hash.new
+    @alphabet.rotate(shift["A"]).each_with_index do |letter, index|
+      bob[letter] = index
+    end
+    bob.invert
+  end
+
+  def b_shift
+    bob = Hash.new
+    @alphabet.rotate(shift["B"]).each_with_index do |letter, index|
+      bob[letter] = index
+    end
+    bob.invert
+  end
+
+  def c_shift
+    bob = Hash.new
+    @alphabet.rotate(shift["C"]).each_with_index do |letter, index|
+      bob[letter] = index
+    end
+    bob.invert
+  end
+
+  def d_shift
+    bob = Hash.new
+    @alphabet.rotate(shift["D"]).each_with_index do |letter, index|
+      bob[letter] = index
+    end
+    bob.invert
+  end
+
 
   def encrypt(message)
+    alphabet_hash = Hash.new
+    @alphabet.each_with_index do |letter, index|
+      alphabet_hash[letter] = index
+    end
+
+    # bob = Hash.new
+    # @alphabet.rotate(3).each_with_index do |letter, index|
+    #   bob[letter] = index
+    # end
     message_array = message.split(//)
     letter_number = 0
-    changed_message = []
-    message_array.each do |letter|
+    lou = []
+    message_array.map do |letter|
       if letter_number == 0 || letter_number.modulo(4) == 0
-        new_num = @alphabet.find_index(letter) + shift["A"]
-        if new_num < 27
-          changed_message << @alphabet[new_num]
-        else
-          until new_num < 27
-            new_num -= 27
-          end
-          changed_message << @alphabet[new_num]
-        end
+        lou << a_shift[alphabet_hash[letter]]
       elsif letter_number == 1 || letter_number.modulo(4) == 1
-        new_num = @alphabet.find_index(letter) + shift["B"]
-        if new_num < 27
-          changed_message << @alphabet[new_num]
-        else
-          until new_num < 27
-            new_num -= 27
-          end
-          changed_message << @alphabet[new_num]
-        end
+        lou << b_shift[alphabet_hash[letter]]
       elsif letter_number == 2 || letter_number.modulo(4) == 2
-        new_num = @alphabet.find_index(letter) + shift["C"]
-        if new_num < 27
-          changed_message << @alphabet[new_num]
-        else
-          until new_num < 27
-            new_num -= 27
-          end
-          changed_message << @alphabet[new_num]
-        end
+        lou << c_shift[alphabet_hash[letter]]
       else
-        new_num = @alphabet.find_index(letter) + shift["D"]
-        if new_num < 27
-          changed_message << @alphabet[new_num]
-        else
-          until new_num < 27
-            new_num -= 27
-          end
-          changed_message << @alphabet[new_num]
-        end
+        lou << d_shift[alphabet_hash[letter]]
       end
       letter_number += 1
     end
-    changed_message.join
+    lou.join
+
   end
+
+  # def encrypt(message)
+  #   message_array = message.split(//)
+  #   letter_number = 0
+  #   changed_message = []
+  #   message_array.each do |letter|
+  #     if letter_number == 0 || letter_number.modulo(4) == 0
+  #       new_num = @alphabet.find_index(letter) + shift["A"]
+  #       if new_num < 27
+  #         changed_message << @alphabet[new_num]
+  #       else
+  #         until new_num < 27
+  #           new_num -= 27
+  #         end
+  #         changed_message << @alphabet[new_num]
+  #       end
+  #     elsif letter_number == 1 || letter_number.modulo(4) == 1
+  #       new_num = @alphabet.find_index(letter) + shift["B"]
+  #       if new_num < 27
+  #         changed_message << @alphabet[new_num]
+  #       else
+  #         until new_num < 27
+  #           new_num -= 27
+  #         end
+  #         changed_message << @alphabet[new_num]
+  #       end
+  #     elsif letter_number == 2 || letter_number.modulo(4) == 2
+  #       new_num = @alphabet.find_index(letter) + shift["C"]
+  #       if new_num < 27
+  #         changed_message << @alphabet[new_num]
+  #       else
+  #         until new_num < 27
+  #           new_num -= 27
+  #         end
+  #         changed_message << @alphabet[new_num]
+  #       end
+  #     else
+  #       new_num = @alphabet.find_index(letter) + shift["D"]
+  #       if new_num < 27
+  #         changed_message << @alphabet[new_num]
+  #       else
+  #         until new_num < 27
+  #           new_num -= 27
+  #         end
+  #         changed_message << @alphabet[new_num]
+  #       end
+  #     end
+  #     letter_number += 1
+  #   end
+  #   changed_message.join
+  # end
+  #
+  # def decrypt(message)
+  #   message_array = message.split(//)
+  #   letter_number = 0
+  #   changed_message = []
+  #   message_array.each do |letter|
+  #     if letter_number == 0 || letter_number.modulo(4) == 0
+  #       new_num = @alphabet.find_index(letter) - shift["A"]
+  #       if new_num < 27
+  #         changed_message << @alphabet[new_num]
+  #       else
+  #         until new_num < 27
+  #           new_num -= 27
+  #         end
+  #         changed_message << @alphabet[new_num]
+  #       end
+  #     elsif letter_number == 1 || letter_number.modulo(4) == 1
+  #       new_num = @alphabet.find_index(letter) - shift["B"]
+  #       if new_num < 27
+  #         changed_message << @alphabet[new_num]
+  #       else
+  #         until new_num < 27
+  #           new_num -= 27
+  #         end
+  #         changed_message << @alphabet[new_num]
+  #       end
+  #     elsif letter_number == 2 || letter_number.modulo(4) == 2
+  #       binding.pry
+  #       new_num = @alphabet.find_index(letter) - shift["C"]
+  #       if new_num < 27
+  #         changed_message << @alphabet[new_num]
+  #       else
+  #         until new_num < 27
+  #           new_num -= 27
+  #         end
+  #         changed_message << @alphabet[new_num]
+  #       end
+  #     else
+  #       new_num = @alphabet.find_index(letter) - shift["D"]
+  #       if new_num < 27
+  #         changed_message << @alphabet[new_num]
+  #       else
+  #         until new_num < 27
+  #           new_num -= 27
+  #         end
+  #         changed_message << @alphabet[new_num]
+  #       end
+  #     end
+  #     letter_number += 1
+  #   end
+  #   binding.pry
+  #   changed_message.join
+  # end
+
+
 end
