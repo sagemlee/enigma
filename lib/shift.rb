@@ -38,55 +38,116 @@ class Shift
   end
 
 
+  def a_shift
+    bob = Hash.new
+    @alphabet.rotate(shift["A"]).each_with_index do |letter, index|
+      bob[letter] = index
+    end
+    bob.invert
+  end
+
+  def b_shift
+    bob = Hash.new
+    @alphabet.rotate(shift["B"]).each_with_index do |letter, index|
+      bob[letter] = index
+    end
+    bob.invert
+  end
+
+  def c_shift
+    bob = Hash.new
+    @alphabet.rotate(shift["C"]).each_with_index do |letter, index|
+      bob[letter] = index
+    end
+    bob.invert
+  end
+
+  def d_shift
+    bob = Hash.new
+    @alphabet.rotate(shift["D"]).each_with_index do |letter, index|
+      bob[letter] = index
+    end
+    bob.invert
+  end
+
+
+    def a_back_shift
+      bob = Hash.new
+      @alphabet.rotate(-(shift["A"])).each_with_index do |letter, index|
+        bob[letter] = index
+      end
+      bob.invert
+    end
+
+    def b_back_shift
+      bob = Hash.new
+      @alphabet.rotate(-(shift["B"])).each_with_index do |letter, index|
+        bob[letter] = index
+      end
+      bob.invert
+    end
+
+    def c_back_shift
+      bob = Hash.new
+      @alphabet.rotate(-(shift["C"])).each_with_index do |letter, index|
+        bob[letter] = index
+      end
+      bob.invert
+    end
+
+    def d_back_shift
+      bob = Hash.new
+      @alphabet.rotate(-(shift["D"])).each_with_index do |letter, index|
+        bob[letter] = index
+      end
+      bob.invert
+    end
 
   def encrypt(message)
+    alphabet_hash = Hash.new
+    @alphabet.each_with_index do |letter, index|
+      alphabet_hash[letter] = index
+    end
     message_array = message.split(//)
     letter_number = 0
     changed_message = []
-    message_array.each do |letter|
+    message_array.map do |letter|
       if letter_number == 0 || letter_number.modulo(4) == 0
-        new_num = @alphabet.find_index(letter) + shift["A"]
-        if new_num < 27
-          changed_message << @alphabet[new_num]
-        else
-          until new_num < 27
-            new_num -= 27
-          end
-          changed_message << @alphabet[new_num]
-        end
+        changed_message << a_shift[alphabet_hash[letter]]
       elsif letter_number == 1 || letter_number.modulo(4) == 1
-        new_num = @alphabet.find_index(letter) + shift["B"]
-        if new_num < 27
-          changed_message << @alphabet[new_num]
-        else
-          until new_num < 27
-            new_num -= 27
-          end
-          changed_message << @alphabet[new_num]
-        end
+        changed_message << b_shift[alphabet_hash[letter]]
       elsif letter_number == 2 || letter_number.modulo(4) == 2
-        new_num = @alphabet.find_index(letter) + shift["C"]
-        if new_num < 27
-          changed_message << @alphabet[new_num]
-        else
-          until new_num < 27
-            new_num -= 27
-          end
-          changed_message << @alphabet[new_num]
-        end
+        changed_message << c_shift[alphabet_hash[letter]]
       else
-        new_num = @alphabet.find_index(letter) + shift["D"]
-        if new_num < 27
-          changed_message << @alphabet[new_num]
-        else
-          until new_num < 27
-            new_num -= 27
-          end
-          changed_message << @alphabet[new_num]
-        end
+        changed_message << d_shift[alphabet_hash[letter]]
+      end
+      letter_number += 1
+    end
+    changed_message.join
+
+  end
+
+  def decrypt(message)
+    alphabet_hash = Hash.new
+    @alphabet.each_with_index do |letter, index|
+      alphabet_hash[letter] = index
+    end
+    message_array = message.split(//)
+    letter_number = 0
+    changed_message = []
+    message_array.map do |letter|
+      if letter_number == 0 || letter_number.modulo(4) == 0
+        changed_message << a_back_shift[alphabet_hash[letter]]
+      elsif letter_number == 1 || letter_number.modulo(4) == 1
+        changed_message << b_back_shift[alphabet_hash[letter]]
+      elsif letter_number == 2 || letter_number.modulo(4) == 2
+        changed_message << c_back_shift[alphabet_hash[letter]]
+      else
+        changed_message << d_back_shift[alphabet_hash[letter]]
       end
       letter_number += 1
     end
     changed_message.join
   end
+
 end
