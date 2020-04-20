@@ -33,7 +33,7 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_can_decrypt_a_string
-    skip
+    
     assert_equal "hello world", @shift.decrypt("keder ohulw")
   end
 end
