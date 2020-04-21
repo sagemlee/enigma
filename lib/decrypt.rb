@@ -1,16 +1,16 @@
 require './lib/enigma'
 require 'pry'
-binding.pry
+
 
 handle = File.open(ARGV[0], "r")
 handle_2 = ARGV[2]
 handle_3 = ARGV[3]
-binding.pry
+
 
 incoming_text = handle.read
 incoming_key = handle_2
 incoming_date = handle_3
-binding.pry
+
 
 handle.close
 
