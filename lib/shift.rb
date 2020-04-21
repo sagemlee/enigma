@@ -1,8 +1,8 @@
-#hash of A = {key => something, offset => somthing}
-#key and offset will be initialized in shift
 require 'pry'
+
 class Shift
   attr_reader :rand_number, :date
+
   def initialize(rand_number, date)
     @rand_number = rand_number
     @date = date
@@ -38,6 +38,15 @@ class Shift
   end
 
 
+  # def rotate_by_shift(letter)
+  #   bob = Hash.new
+  #   binding.pry
+  #   @alphabet.rotate(shift["letter"]).each_with_index do |letter, index|
+  #     bob[letter] = index
+  #   end
+  #   bob.invert
+  # end
+
   def a_shift
     bob = Hash.new
     @alphabet.rotate(shift["A"]).each_with_index do |letter, index|
@@ -71,37 +80,7 @@ class Shift
   end
 
 
-    def a_back_shift
-      bob = Hash.new
-      @alphabet.rotate(-(shift["A"])).each_with_index do |letter, index|
-        bob[letter] = index
-      end
-      bob.invert
-    end
 
-    def b_back_shift
-      bob = Hash.new
-      @alphabet.rotate(-(shift["B"])).each_with_index do |letter, index|
-        bob[letter] = index
-      end
-      bob.invert
-    end
-
-    def c_back_shift
-      bob = Hash.new
-      @alphabet.rotate(-(shift["C"])).each_with_index do |letter, index|
-        bob[letter] = index
-      end
-      bob.invert
-    end
-
-    def d_back_shift
-      bob = Hash.new
-      @alphabet.rotate(-(shift["D"])).each_with_index do |letter, index|
-        bob[letter] = index
-      end
-      bob.invert
-    end
 
   def encrypt(message)
     alphabet_hash = Hash.new
@@ -141,6 +120,38 @@ class Shift
     end
     changed_message.join
 
+  end
+
+  def a_back_shift
+    bob = Hash.new
+    @alphabet.rotate(-(shift["A"])).each_with_index do |letter, index|
+      bob[letter] = index
+    end
+    bob.invert
+  end
+
+  def b_back_shift
+    bob = Hash.new
+    @alphabet.rotate(-(shift["B"])).each_with_index do |letter, index|
+      bob[letter] = index
+    end
+    bob.invert
+  end
+
+  def c_back_shift
+    bob = Hash.new
+    @alphabet.rotate(-(shift["C"])).each_with_index do |letter, index|
+      bob[letter] = index
+    end
+    bob.invert
+  end
+
+  def d_back_shift
+    bob = Hash.new
+    @alphabet.rotate(-(shift["D"])).each_with_index do |letter, index|
+      bob[letter] = index
+    end
+    bob.invert
   end
 
   def decrypt(message)
