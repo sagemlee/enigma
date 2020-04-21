@@ -28,6 +28,4 @@ class Enigma
     decrypt_hash[:date] = date
     decrypt_hash
   end
-
-
 end
