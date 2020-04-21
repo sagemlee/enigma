@@ -108,7 +108,7 @@ class Shift
     @alphabet.each_with_index do |letter, index|
       alphabet_hash[letter] = index
     end
-    message_array = message.split(//)
+    message_array = message.downcase.split(//)
     letter_number = 0
     changed_message = []
     message_array.map do |letter|

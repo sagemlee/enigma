@@ -33,7 +33,12 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_can_decrypt_a_string
-    
     assert_equal "hello world", @shift.decrypt("keder ohulw")
   end
+
+  def test_it_can_encrypt_capitals
+    assert_equal "keder ohulw", @shift.encrypt("HeLlo WoRld")
+  end
+
+
 end

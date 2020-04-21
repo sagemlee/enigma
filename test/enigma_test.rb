@@ -74,8 +74,11 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_encrypt_without_given_date_or_key
+    Date.stubs(:strftime).returns("042021")
+
+
     enigma = Enigma.new("hello world")
-    enigma.stubs(:key).returns("02715")
+    Enigma.stubs(:date).returns("042021")
     expected =
     {
       encryption: "jib qdmctpu",

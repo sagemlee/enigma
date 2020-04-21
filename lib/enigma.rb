@@ -4,7 +4,11 @@ require 'date'
 class Enigma
   attr_reader :message, :key, :date, :shift
 
-  def initialize(message, key = rand(100000).to_s.rjust(5, "0"), date = Date.today.strftime("%m%d%y"))
+  def rand_number
+    rand(100000).to_s.rjust(5, "0")
+  end
+
+  def initialize(message, key = rand_number, date = Date.today.strftime("%m%d%y"))
     @message = message
     @key = key
     @date = date
