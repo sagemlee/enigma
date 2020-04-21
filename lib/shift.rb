@@ -37,156 +37,68 @@ class Shift
     assignments
   end
 
-
-  # def rotate_by_shift(letter)
-  #   bob = Hash.new
-  #   binding.pry
-  #   @alphabet.rotate(shift["letter"]).each_with_index do |letter, index|
-  #     bob[letter] = index
-  #   end
-  #   bob.invert
-  # end
-
-  def a_shift
-    bob = Hash.new
-    @alphabet.rotate(shift["A"]).each_with_index do |letter, index|
-      bob[letter] = index
+  def rotate_by_shift(letter)
+    rotated_hash = Hash.new
+    @alphabet.rotate(shift[letter]).each_with_index do |letter, index|
+      rotated_hash[letter] = index
     end
-    bob.invert
+    rotated_hash.invert
   end
 
-  def b_shift
-    bob = Hash.new
-    @alphabet.rotate(shift["B"]).each_with_index do |letter, index|
-      bob[letter] = index
+  def alphabet_hash
+    alphabet_index = Hash.new
+    @alphabet.each_with_index do |letter, index|
+      alphabet_index[letter] = index
     end
-    bob.invert
+    alphabet_index
   end
-
-  def c_shift
-    bob = Hash.new
-    @alphabet.rotate(shift["C"]).each_with_index do |letter, index|
-      bob[letter] = index
-    end
-    bob.invert
-  end
-
-  def d_shift
-    bob = Hash.new
-    @alphabet.rotate(shift["D"]).each_with_index do |letter, index|
-      bob[letter] = index
-    end
-    bob.invert
-  end
-
-
-
 
   def encrypt(message)
-    alphabet_hash = Hash.new
-    @alphabet.each_with_index do |letter, index|
-      alphabet_hash[letter] = index
-    end
     message_array = message.downcase.split(//)
     letter_number = 0
     changed_message = []
-    message_array.map do |letter|
-      if letter_number == 0 || letter_number.modulo(4) == 0
-        if alphabet_hash[letter] != nil
-          changed_message << a_shift[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
-      elsif letter_number == 1 || letter_number.modulo(4) == 1
-        if alphabet_hash[letter] != nil
-          changed_message << b_shift[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
-      elsif letter_number == 2 || letter_number.modulo(4) == 2
-        if alphabet_hash[letter] != nil
-          changed_message << c_shift[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
+
+    message_array.each do |letter|
+      if (letter_number == 0 || letter_number.modulo(4) == 0) && alphabet_hash[letter] != nil
+        changed_message << rotate_by_shift("A")[alphabet_hash[letter]]
+      elsif (letter_number == 1 || letter_number.modulo(4) == 1) && alphabet_hash[letter] != nil
+        changed_message << rotate_by_shift("B")[alphabet_hash[letter]]
+      elsif (letter_number == 2 || letter_number.modulo(4) == 2) && alphabet_hash[letter] != nil
+        changed_message << rotate_by_shift("C")[alphabet_hash[letter]]
+      elsif alphabet_hash[letter] != nil
+        changed_message << rotate_by_shift("D")[alphabet_hash[letter]]
       else
-        if alphabet_hash[letter] != nil
-          changed_message << d_shift[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
+        changed_message << letter
       end
       letter_number += 1
     end
     changed_message.join
-
   end
 
-  def a_back_shift
-    bob = Hash.new
-    @alphabet.rotate(-(shift["A"])).each_with_index do |letter, index|
-      bob[letter] = index
+  def rotate_back_by_shift(letter)
+    rotated_hash = Hash.new
+    @alphabet.rotate(-(shift[letter])).each_with_index do |letter, index|
+      rotated_hash[letter] = index
     end
-    bob.invert
-  end
-
-  def b_back_shift
-    bob = Hash.new
-    @alphabet.rotate(-(shift["B"])).each_with_index do |letter, index|
-      bob[letter] = index
-    end
-    bob.invert
-  end
-
-  def c_back_shift
-    bob = Hash.new
-    @alphabet.rotate(-(shift["C"])).each_with_index do |letter, index|
-      bob[letter] = index
-    end
-    bob.invert
-  end
-
-  def d_back_shift
-    bob = Hash.new
-    @alphabet.rotate(-(shift["D"])).each_with_index do |letter, index|
-      bob[letter] = index
-    end
-    bob.invert
+    rotated_hash.invert
   end
 
   def decrypt(message)
-    alphabet_hash = Hash.new
-    @alphabet.each_with_index do |letter, index|
-      alphabet_hash[letter] = index
-    end
     message_array = message.downcase.split(//)
     letter_number = 0
     changed_message = []
-    message_array.map do |letter|
-      if letter_number == 0 || letter_number.modulo(4) == 0
-        if alphabet_hash[letter] != nil
-          changed_message << a_back_shift[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
-      elsif letter_number == 1 || letter_number.modulo(4) == 1
-        if alphabet_hash[letter] != nil
-          changed_message << b_back_shift[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
-      elsif letter_number == 2 || letter_number.modulo(4) == 2
-        if alphabet_hash[letter] != nil
-          changed_message << c_back_shift[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
+
+    message_array.each do |letter|
+      if (letter_number == 0 || letter_number.modulo(4) == 0) && alphabet_hash[letter] != nil
+        changed_message << rotate_back_by_shift("A")[alphabet_hash[letter]]
+      elsif (letter_number == 1 || letter_number.modulo(4) == 1) && alphabet_hash[letter] != nil
+        changed_message << rotate_back_by_shift("B")[alphabet_hash[letter]]
+      elsif (letter_number == 2 || letter_number.modulo(4) == 2) && alphabet_hash[letter] != nil
+        changed_message << rotate_back_by_shift("C")[alphabet_hash[letter]]
+      elsif alphabet_hash[letter] != nil
+        changed_message << rotate_back_by_shift("D")[alphabet_hash[letter]]
       else
-        if alphabet_hash[letter] != nil
-          changed_message << d_back_shift[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
+        changed_message << letter
       end
       letter_number += 1
     end

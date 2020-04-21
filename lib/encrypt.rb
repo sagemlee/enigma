@@ -9,7 +9,7 @@ handle.close
 
 enigma = Enigma.new
 update = enigma.encrypt(incoming_text)
-decrypted_text = update[:encryption]
+encrypted_text = update[:encryption]
 key = update[:key]
 date = update[:date]
 
@@ -18,6 +18,6 @@ puts "Created 'encrypted.txt' with the key #{key} and date #{date}"
 
 writer = File.open(ARGV[1], "w")
 
-writer.write(decrypted_text)
+writer.write(encrypted_text)
 
 writer.close
