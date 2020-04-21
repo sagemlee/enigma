@@ -2,7 +2,7 @@ require './lib/shift'
 require 'date'
 
 class Enigma
-  attr_reader :message, :key, :date, :shift
+   
   def initialize
     #(message, key = rand_number, date = Date.today.strftime("%m%d%y"))
     # @message = message

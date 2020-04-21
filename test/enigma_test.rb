@@ -68,30 +68,28 @@ class EnigmaTest < Minitest::Test
   #enigma.decrypt(encrypted[:encryption], "02715")
 
   def test_it_can_decrypt_without_given_date
-    skip
-    enigma = Enigma.new("jib qdmctpu", "02715")
+    enigma = Enigma.new
     expected =
     {
       decryption: "hello world",
       key: "02715",
       date: "042020"
     }
-    assert_equal expected, enigma.decrypt
+    assert_equal expected, enigma.decrypt("jib qdmctpu", "02715")
   end
 
   def test_it_can_encrypt_without_given_date_or_key
-    skip
-    #Date.stubs(:strftime).returns("042021")
-    enigma = Enigma.new("hello world")
-    @key = mock
-    #Enigma.stubs(:date).returns("042021")
+    enigma = Enigma.new
+    Date.stubs(:strftime).returns("042021")
+    Enigma.stubs(:date).returns("042021")
+    Enigma.stubs(:rand_number).returns("02715")
     expected =
     {
       encryption: "jib qdmctpu",
       key: "02715",
       date: "042020"
     }
-    assert_equal expected, enigma.encrypt
+    assert_equal expected, enigma.encrypt("hello world")
   end
 
 

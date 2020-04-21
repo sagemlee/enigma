@@ -7,8 +7,8 @@ incoming_text = handle.read
 
 handle.close
 
-enigma = Enigma.new(incoming_text)
-update = enigma.encrypt
+enigma = Enigma.new
+update = enigma.encrypt(incoming_text)
 decrypted_text = update[:encryption]
 key = update[:key]
 date = update[:date]

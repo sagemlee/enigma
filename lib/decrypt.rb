@@ -10,8 +10,8 @@ incoming_date = handle_3
 
 handle.close
 
-enigma = Enigma.new(incoming_text, incoming_key, incoming_date)
-update = enigma.decrypt
+enigma = Enigma.new
+update = enigma.decrypt(incoming_text, incoming_key, incoming_date)
 decrypted_text = update[:decryption]
 
 puts "Created 'decrypted.txt' with the key #{incoming_key} and date #{incoming_date}"
