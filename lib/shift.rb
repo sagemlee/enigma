@@ -37,7 +37,6 @@ class Shift
     assignments
   end
 
-
   def rotate_by_shift(letter)
     bob = Hash.new
     @alphabet.rotate(shift[letter]).each_with_index do |letter, index|
@@ -46,11 +45,15 @@ class Shift
     bob.invert
   end
 
-  def encrypt(message)
-    alphabet_hash = Hash.new
+  def alphabet_hash
+    alphabet_index = Hash.new
     @alphabet.each_with_index do |letter, index|
-      alphabet_hash[letter] = index
+      alphabet_index[letter] = index
     end
+    alphabet_index
+  end
+
+  def encrypt(message)
     message_array = message.downcase.split(//)
     letter_number = 0
     changed_message = []
@@ -94,35 +97,7 @@ class Shift
     bob.invert
   end
 
-  def b_back_shift
-    bob = Hash.new
-    @alphabet.rotate(-(shift["B"])).each_with_index do |letter, index|
-      bob[letter] = index
-    end
-    bob.invert
-  end
-
-  def c_back_shift
-    bob = Hash.new
-    @alphabet.rotate(-(shift["C"])).each_with_index do |letter, index|
-      bob[letter] = index
-    end
-    bob.invert
-  end
-
-  def d_back_shift
-    bob = Hash.new
-    @alphabet.rotate(-(shift["D"])).each_with_index do |letter, index|
-      bob[letter] = index
-    end
-    bob.invert
-  end
-
   def decrypt(message)
-    alphabet_hash = Hash.new
-    @alphabet.each_with_index do |letter, index|
-      alphabet_hash[letter] = index
-    end
     message_array = message.downcase.split(//)
     letter_number = 0
     changed_message = []
