@@ -48,7 +48,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_encrypt_without_given_date
-
     enigma = Enigma.new
     expected =
     {
@@ -99,7 +98,6 @@ class EnigmaTest < Minitest::Test
         date: "291018",
         key: "08304"
       }
-
     assert_equal expected, enigma.crack("vjqtbeaweqihssi", "291018")
   end
 end
