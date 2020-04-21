@@ -108,18 +108,34 @@ class Shift
     @alphabet.each_with_index do |letter, index|
       alphabet_hash[letter] = index
     end
-    message_array = message.split(//)
+    message_array = message.downcase.split(//)
     letter_number = 0
     changed_message = []
     message_array.map do |letter|
       if letter_number == 0 || letter_number.modulo(4) == 0
-        changed_message << a_shift[alphabet_hash[letter]]
+        if alphabet_hash[letter] != nil
+          changed_message << a_shift[alphabet_hash[letter]]
+        else
+          changed_message << letter
+        end
       elsif letter_number == 1 || letter_number.modulo(4) == 1
-        changed_message << b_shift[alphabet_hash[letter]]
+        if alphabet_hash[letter] != nil
+          changed_message << b_shift[alphabet_hash[letter]]
+        else
+          changed_message << letter
+        end
       elsif letter_number == 2 || letter_number.modulo(4) == 2
-        changed_message << c_shift[alphabet_hash[letter]]
+        if alphabet_hash[letter] != nil
+          changed_message << c_shift[alphabet_hash[letter]]
+        else
+          changed_message << letter
+        end
       else
-        changed_message << d_shift[alphabet_hash[letter]]
+        if alphabet_hash[letter] != nil
+          changed_message << d_shift[alphabet_hash[letter]]
+        else
+          changed_message << letter
+        end
       end
       letter_number += 1
     end
@@ -132,18 +148,34 @@ class Shift
     @alphabet.each_with_index do |letter, index|
       alphabet_hash[letter] = index
     end
-    message_array = message.split(//)
+    message_array = message.downcase.split(//)
     letter_number = 0
     changed_message = []
     message_array.map do |letter|
       if letter_number == 0 || letter_number.modulo(4) == 0
-        changed_message << a_back_shift[alphabet_hash[letter]]
+        if alphabet_hash[letter] != nil
+          changed_message << a_back_shift[alphabet_hash[letter]]
+        else
+          changed_message << letter
+        end
       elsif letter_number == 1 || letter_number.modulo(4) == 1
-        changed_message << b_back_shift[alphabet_hash[letter]]
+        if alphabet_hash[letter] != nil
+          changed_message << b_back_shift[alphabet_hash[letter]]
+        else
+          changed_message << letter
+        end
       elsif letter_number == 2 || letter_number.modulo(4) == 2
-        changed_message << c_back_shift[alphabet_hash[letter]]
+        if alphabet_hash[letter] != nil
+          changed_message << c_back_shift[alphabet_hash[letter]]
+        else
+          changed_message << letter
+        end
       else
-        changed_message << d_back_shift[alphabet_hash[letter]]
+        if alphabet_hash[letter] != nil
+          changed_message << d_back_shift[alphabet_hash[letter]]
+        else
+          changed_message << letter
+        end
       end
       letter_number += 1
     end

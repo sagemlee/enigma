@@ -33,7 +33,20 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_can_decrypt_a_string
-    
     assert_equal "hello world", @shift.decrypt("keder ohulw")
   end
+
+  def test_it_will_translate_in_lowercase
+    assert_equal "keder ohulw", @shift.encrypt("HeLlo WoRld")
+  end
+
+  def test_it_wont_encrypt_special_characters
+    assert_equal "keder ohulw!!!?", @shift.encrypt("hello world!!!?")
+  end
+
+  def test_it_wont_decrypt_special_characters
+    assert_equal "hello world!!!?", @shift.decrypt("keder ohulw!!!?")
+  end
+
+
 end
