@@ -9,6 +9,14 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, enigma
   end
 
+  def test_it_can_generate_random_number
+    enigma = Enigma.new
+    assert_instance_of String, enigma.rand_number
+    assert_equal 5, enigma.rand_number.length
+    assert enigma.rand_number.to_i < 100000
+    assert enigma.rand_number.to_i > 0
+  end
+
   def test_it_has_readable_attributes
     skip
     enigma = Enigma.new("hello world", "02715", "040895")
@@ -18,11 +26,17 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Shift, enigma.shift
   end
 
-  def test_it_can_produce_todays_date_by_default
-    skip
-    enigma = Enigma.new("hello world", "02715")
-    assert_equal 6, enigma.date.length
+  def test_it_generate_todays_date
+    enigma = Enigma.new
+    assert_instance_of String, enigma.todays_date
+    assert_equal 6, enigma.todays_date.length
+    assert enigma.todays_date.to_i < 130000
+
   end
+  #   skip
+  #   enigma = Enigma.new("hello world", "02715")
+  #   assert_equal 6, enigma.date.length
+  # end
 
   def test_it_can_produce_rand_key_by_default
     skip
@@ -82,7 +96,7 @@ class EnigmaTest < Minitest::Test
     enigma = Enigma.new
     Date.stubs(:strftime).returns("042021")
     Enigma.stubs(:date).returns("042021")
-    Enigma.stubs(:rand_number).returns("02715")
+    String.stubs(:rand_number).returns("02715")
     expected =
     {
       encryption: "jib qdmctpu",
