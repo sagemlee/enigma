@@ -1,15 +1,23 @@
+require './lib/enigma'
+require 'pry'
+
 handle = File.open(ARGV[0], "r")
 
 incoming_text = handle.read
 
 handle.close
 
-puts "Created 'encrypted.txt' with the key 82648 and date 240818"
+enigma = Enigma.new(incoming_text)
+update = enigma.encrypt
+decrypted_text = update[:encryption]
+key = update[:key]
+date = update[:date]
 
-decrypted_text = incoming_text.upcase
+puts "Created 'encrypted.txt' with the key #{key} and date #{date}"
+
 
 writer = File.open(ARGV[1], "w")
 
-writer.write(capitalized_text)
+writer.write(decrypted_text)
 
 writer.close
