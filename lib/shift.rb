@@ -58,7 +58,7 @@ class Shift
     letter_number = 0
     changed_message = []
 
-    message_array.map do |letter|
+    message_array.each do |letter|
       if (letter_number == 0 || letter_number.modulo(4) == 0) && alphabet_hash[letter] != nil
         changed_message << rotate_by_shift("A")[alphabet_hash[letter]]
       elsif (letter_number == 1 || letter_number.modulo(4) == 1) && alphabet_hash[letter] != nil
@@ -87,8 +87,8 @@ class Shift
     message_array = message.downcase.split(//)
     letter_number = 0
     changed_message = []
-    
-    message_array.map do |letter|
+
+    message_array.each do |letter|
       if (letter_number == 0 || letter_number.modulo(4) == 0) && alphabet_hash[letter] != nil
         changed_message << rotate_back_by_shift("A")[alphabet_hash[letter]]
       elsif (letter_number == 1 || letter_number.modulo(4) == 1) && alphabet_hash[letter] != nil
