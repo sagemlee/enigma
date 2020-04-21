@@ -40,8 +40,12 @@ class ShiftTest < Minitest::Test
     assert_equal "keder ohulw", @shift.encrypt("HeLlo WoRld")
   end
 
-  def test_it_wont_translate_special_characters
+  def test_it_wont_encrypt_special_characters
     assert_equal "keder ohulw!!!?", @shift.encrypt("hello world!!!?")
+  end
+
+  def test_it_wont_decrypt_special_characters
+    assert_equal "hello world!!!?", @shift.decrypt("keder ohulw!!!?")
   end
 
 
