@@ -38,11 +38,11 @@ class Shift
   end
 
   def rotate_by_shift(letter)
-    bob = Hash.new
+    rotated_hash = Hash.new
     @alphabet.rotate(shift[letter]).each_with_index do |letter, index|
-      bob[letter] = index
+      rotated_hash[letter] = index
     end
-    bob.invert
+    rotated_hash.invert
   end
 
   def alphabet_hash
@@ -57,75 +57,48 @@ class Shift
     message_array = message.downcase.split(//)
     letter_number = 0
     changed_message = []
+
     message_array.map do |letter|
-      if letter_number == 0 || letter_number.modulo(4) == 0
-        if alphabet_hash[letter] != nil
-          changed_message << rotate_by_shift("A")[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
-      elsif letter_number == 1 || letter_number.modulo(4) == 1
-        if alphabet_hash[letter] != nil
-          changed_message << rotate_by_shift("B")[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
-      elsif letter_number == 2 || letter_number.modulo(4) == 2
-        if alphabet_hash[letter] != nil
-          changed_message << rotate_by_shift("C")[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
+      if (letter_number == 0 || letter_number.modulo(4) == 0) && alphabet_hash[letter] != nil
+        changed_message << rotate_by_shift("A")[alphabet_hash[letter]]
+      elsif (letter_number == 1 || letter_number.modulo(4) == 1) && alphabet_hash[letter] != nil
+        changed_message << rotate_by_shift("B")[alphabet_hash[letter]]
+      elsif (letter_number == 2 || letter_number.modulo(4) == 2) && alphabet_hash[letter] != nil
+        changed_message << rotate_by_shift("C")[alphabet_hash[letter]]
+      elsif alphabet_hash[letter] != nil
+        changed_message << rotate_by_shift("D")[alphabet_hash[letter]]
       else
-        if alphabet_hash[letter] != nil
-          changed_message << rotate_by_shift("D")[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
+        changed_message << letter
       end
       letter_number += 1
     end
     changed_message.join
-
   end
 
   def rotate_back_by_shift(letter)
-    bob = Hash.new
+    rotated_hash = Hash.new
     @alphabet.rotate(-(shift[letter])).each_with_index do |letter, index|
-      bob[letter] = index
+      rotated_hash[letter] = index
     end
-    bob.invert
+    rotated_hash.invert
   end
 
   def decrypt(message)
     message_array = message.downcase.split(//)
     letter_number = 0
     changed_message = []
+    
     message_array.map do |letter|
-      if letter_number == 0 || letter_number.modulo(4) == 0
-        if alphabet_hash[letter] != nil
-          changed_message << rotate_back_by_shift("A")[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
-      elsif letter_number == 1 || letter_number.modulo(4) == 1
-        if alphabet_hash[letter] != nil
-          changed_message << rotate_back_by_shift("B")[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
-      elsif letter_number == 2 || letter_number.modulo(4) == 2
-        if alphabet_hash[letter] != nil
-          changed_message << rotate_back_by_shift("C")[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
+      if (letter_number == 0 || letter_number.modulo(4) == 0) && alphabet_hash[letter] != nil
+        changed_message << rotate_back_by_shift("A")[alphabet_hash[letter]]
+      elsif (letter_number == 1 || letter_number.modulo(4) == 1) && alphabet_hash[letter] != nil
+        changed_message << rotate_back_by_shift("B")[alphabet_hash[letter]]
+      elsif (letter_number == 2 || letter_number.modulo(4) == 2) && alphabet_hash[letter] != nil
+        changed_message << rotate_back_by_shift("C")[alphabet_hash[letter]]
+      elsif alphabet_hash[letter] != nil
+        changed_message << rotate_back_by_shift("D")[alphabet_hash[letter]]
       else
-        if alphabet_hash[letter] != nil
-          changed_message << rotate_back_by_shift("D")[alphabet_hash[letter]]
-        else
-          changed_message << letter
-        end
+        changed_message << letter
       end
       letter_number += 1
     end
